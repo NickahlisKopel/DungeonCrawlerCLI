@@ -3,12 +3,22 @@ package com.careerdevs;
 public class Enemy {
     private String name;
     private int health;
+    private int maxHealth;
     private int damage;
 
-    public Enemy(String name, int health, int damage) {
+    public Enemy(String name, int health,int maxHealth, int damage) {
         this.name = name;
         this.health = health;
+        this.maxHealth = maxHealth;
         this.damage = damage;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
     }
 
     public String getName() {

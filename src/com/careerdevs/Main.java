@@ -5,10 +5,10 @@ import com.careerdevs.ui.CLI;
 import java.util.Random;
 
 public class Main {
-    static Enemy enemy1 = new Enemy("bat",5,1);
-    static Enemy enemy2 = new Enemy("rat",10,2);
-    static Enemy enemy3 = new Enemy("guard",50,25);
-    static Enemy enemy4 = new Enemy("dragon",100,35);
+    static Enemy enemy1 = new Enemy("bat",5,5,1);
+    static Enemy enemy2 = new Enemy("rat",10,10,2);
+    static Enemy enemy3 = new Enemy("guard",50,50,25);
+    static Enemy enemy4 = new Enemy("dragon",100,100,35);
     public static Enemy[] enemies = {enemy1,enemy2,enemy3,enemy4};
     static Player player = new Player("Name",50,20);
     static Random rand = new Random();
@@ -37,12 +37,18 @@ public class Main {
             player.setHealth(50);
             System.out.println("Health Restored!");
         }
+        for(int i = 0; i < enemies.length;i++){
+            if(enemies[i].getHealth() < enemies[i].getMaxHealth()){
+                enemies[i].setHealth(enemies[i].getMaxHealth());
+            }
+        }
         int selection = CLI.readInt("1)Ready\n2)Stats\n3)Main Menu\nSelection",1,3);
         if(selection == 1){
             encounter();
             return;
         }else if (selection == 2){
             System.out.println("Stats");
+            System.out.println("Health: "+player.getHealth()+"\nDamage: "+player.getDamage());
             game();
             return;
         }else{
@@ -97,6 +103,7 @@ public class Main {
                 int chance = rand.nextInt(100);
                 if(chance > 50){
                     game();
+                    return;
                 }else{
                     System.out.println("Flee Failed!");
                 }
